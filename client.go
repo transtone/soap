@@ -71,7 +71,7 @@ func NewClient(url string, auth *BasicAuth, tr *http.Transport) *Client {
 // Call make a SOAP call
 func (s *Client) Call(soapAction string, request, response interface{}) (httpResponse *http.Response, err error) {
 
-	envelope := Envelope{}
+	envelope := Envelope{NsEnv: "http://schemas.xmlsoap.org/soap/envelope/"}
 
 	envelope.Body.Content = request
 
