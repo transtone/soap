@@ -19,21 +19,22 @@ func l(m ...interface{}) {
 
 // Envelope type
 type Envelope struct {
-	XMLName xml.Name `xml:"http://schemas.xmlsoap.org/soap/envelope/ Envelope"`
+	XMLName xml.Name `xml:"soapenv:Envelope"`
+	NsEnv   string   `xml:"xmlns:soapenv,attr"`
 	Header  Header
 	Body    Body
 }
 
 // Header type
 type Header struct {
-	XMLName xml.Name `xml:"http://schemas.xmlsoap.org/soap/envelope/ Header"`
+	XMLName xml.Name `soapenv:Header"`
 
 	Header interface{}
 }
 
 // Body type
 type Body struct {
-	XMLName xml.Name `xml:"http://schemas.xmlsoap.org/soap/envelope/ Body"`
+	XMLName xml.Name `xml:"Body"`
 
 	Fault               *Fault      `xml:",omitempty"`
 	Content             interface{} `xml:",omitempty"`
