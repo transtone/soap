@@ -19,17 +19,38 @@ func l(m ...interface{}) {
 
 // Envelope type
 type Envelope struct {
-	XMLName xml.Name `xml:"soapenv:Envelope"`
-	NsEnv   string   `xml:"xmlns:soapenv,attr"`
+	XMLName xml.Name `xml:"Envelope"`
 	Header  Header
 	Body    Body
 }
 
 // Header type
 type Header struct {
-	XMLName xml.Name `soapenv:Header"`
+	XMLName xml.Name `xml:"Header"`
 
 	Header interface{}
+}
+
+type ReqEnvelope struct {
+	XMLName xml.Name `xml:"soapenv:Envelope"`
+	NsEnv   string   `xml:"xmlns:soapenv,attr"`
+	Header  ReqHeader
+	Body    ReqBody
+}
+
+// Header type
+type ReqHeader struct {
+	XMLName xml.Name `xml:"soapenv:Header"`
+
+	Header interface{}
+}
+
+type ReqBody struct {
+	XMLName xml.Name `xml:"soapenv:Body"`
+
+	Fault               *Fault      `xml:",omitempty"`
+	Content             interface{} `xml:",omitempty"`
+	SOAPBodyContentType string      `xml:"-"`
 }
 
 // Body type
